@@ -1,0 +1,17 @@
+{
+  "name": "knit-pattern-generator",
+  "version": "1.0.0",
+  "description": "Generate your own knitting pattern!",
+  "main": "index.js",
+  "scripts": {
+    "test": "test",
+    "start": "npx tsc && node dist/index.js"
+  },
+  "author": "Megan McClure",
+  "license": "ISC",
+  "devDependencies": {
+    "@tsconfig/node16": "^1.0.3",
+    "@types/node": "^18.11.10",
+    "typescript": "^4.9.3"
+  }
+}

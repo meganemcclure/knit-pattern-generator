@@ -1,0 +1,37 @@
+{
+    "SHOE_SIZE_CHART_CM": {
+        "kids": {
+            "6": { "length": 13.3, "circumference": 16.5 },
+            "7": { "length": 14.1, "circumference": 16.5 },
+            "8": { "length": 15.0, "circumference": 17.9 },
+            "9": { "length": 15.8, "circumference": 17.9 },
+            "10": { "length": 16.7, "circumference": 17.9 },
+            "11": { "length": 17.5, "circumference": 19.5 },
+            "12": { "length": 18.3, "circumference": 19.5 },
+            "13": { "length": 19.2, "circumference": 19.5 }
+        },
+        "womens": {
+            "4": { "length": 21.2, "circumference": 21.2 },
+            "5": { "length": 22.0, "circumference": 21.6 },
+            "6": { "length": 22.9, "circumference": 22.0 },
+            "7": { "length": 23.7, "circumference": 22.9 },
+            "8": { "length": 24.6, "circumference": 22.9 },
+            "9": { "length": 25.4, "circumference": 24.1 },
+            "10": { "length": 26.2, "circumference": 24.6 },
+            "11": { "length": 27.1, "circumference": 25.4 },
+            "12": { "length": 27.9, "circumference": 26.2 }
+        },
+        "mens": {
+            "6": { "length": 23.7, "circumference": 22.9 },
+            "7": { "length": 24.6, "circumference": 22.9 },
+            "8": { "length": 25.4, "circumference": 24.1 },
+            "9": { "length": 26.2, "circumference": 24.6 },
+            "10": { "length": 27.1, "circumference": 25.4 },
+            "11": { "length": 27.9, "circumference": 26.2 },
+            "12": { "length": 28.8, "circumference": 26.7 },
+            "13": { "length": 29.6, "circumference": 27.1 },
+            "14": { "length": 30.5, "circumference": 27.9 },
+            "15": { "length": 31.8, "circumference": 27.9 }
+        }
+    }
+}
