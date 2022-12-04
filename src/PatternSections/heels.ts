@@ -55,8 +55,8 @@ export class GSRHeel implements GSRType {
                 `Pull up the first stitch to make a double stitch, and work across ${sizeFormat(this.stsPerRound.map((sts: number) => (sts/2)-1))} sts. Turn the work.`,
                 `${firstTurnRepeat}`,
                 `Work 2 rounds.`,
-                `Work across ${this.innerSections.map((inner, index) => (inner + this.outerSections[index] + 1))} sts. Turn the work.`,
-                `Pull up the first stitch to make a double stitch and work across ${this.innerSections.map((inner) => (inner + 1))} sts. Turn the work.`,
+                `Work across ${sizeFormat(this.innerSections.map((inner, index) => (inner + this.outerSections[index] + 1)))} sts. Turn the work.`,
+                `Pull up the first stitch to make a double stitch and work across ${sizeFormat(this.innerSections.map((inner) => (inner + 1)))} sts. Turn the work.`,
                 `${secondTurnRepeat}`
             ]
         }

@@ -1,4 +1,4 @@
-import type { CastOnType, GSRType, PatternType,  SockParamsType } from "../types";
+import type { CastOnType, CuffType, LegType, GSRType, FootType, ToeType, PatternType,  SockParamsType } from "../types";
 import * as resources from '../resources.json'
 import { CastOn } from '../PatternSections/caston'
 import { Cuff } from '../PatternSections/cuff'
@@ -6,11 +6,18 @@ import { Leg } from '../PatternSections/leg'
 import { GSRHeel } from '../PatternSections/heels'
 import { Foot } from '../PatternSections/foot'
 import { ClassicToe } from '../PatternSections/toes'
-import { getStitchWidth } from "../helpers";
+import { sizeFormat, getStitchWidth } from "../helpers";
 // NOTE: sock sizing chart from: https://www.knitgrammer.com/blog/foot-size-chart-for-sock-knitting/
 
 const ABBREVIATIONS = `
-    - sts: stitches,
+    - sts: stitches
+    - st: stitch
+    - K: knit
+    - K2tog: knit 2 together
+    - SSK: slip, slip, knit
+    - SM: slip marker
+
+    Sizes:
     - kid's sizes: ${sizeFormat(Object.keys(resources.SHOE_SIZE_CHART_CM.kids))}
     - women's sizes: ${sizeFormat(Object.keys(resources.SHOE_SIZE_CHART_CM.womens))}
     - men's sizes: ${sizeFormat(Object.keys(resources.SHOE_SIZE_CHART_CM.mens))} 
@@ -21,11 +28,11 @@ const NEGATIVE_EASE_LENGTH = 0.9            // sock has 10% netagive ease length
 export default class Sock {
     roundSts: number[]
     caston: CastOnType
-    cuff: any
-    leg: any
+    cuff: CuffType
+    leg: LegType
     heel: GSRType
-    foot: any
-    toe: any
+    foot: FootType
+    toe: ToeType
 
     constructor(params: SockParamsType) {
         let { guage, cuffLength, legLength, sizeRange } = params
@@ -41,9 +48,6 @@ export default class Sock {
         this.leg = new Leg(legLength, guage)
         this.heel = new GSRHeel(this.roundSts)
         this.toe = new ClassicToe(this.roundSts)
-        console.log(`heel length: ${this.heel.getLength(guage)}`)
-        console.log(`toe length: ${this.toe.getLength(guage)}`)
-        console.log(`foot length: ${Object.values(sizeChart).map(size => size.length)}`)
         this.foot = new Foot(Object.values(sizeChart).map(size => size.length), this.heel.getLength(guage), this.toe.getLength(guage), guage, NEGATIVE_EASE_LENGTH)
     }
 
@@ -65,20 +69,4 @@ export default class Sock {
 
         return pattern
     }
-
-    roundsSection(rounds: number | number[], stitchType: string) {
-        if (typeof rounds === 'number') {
-            return [`Join in the round. Then work ${rounds} round(s) of ${stitchType}.`]
-        }
-        return [`Join in the round. Then work ${sizeFormat(rounds)} round(s) of ${stitchType}.`]
-    }
-}
-
-function sizeFormat(stitches: number[] | string[]) {
-    return stitches.join(', ')
-}
-
-function repeat(section: string, repeats: number[]): string {
-    return `*${section}*
-        Work from * to * ${sizeFormat(repeats)} time(s).`
 }

@@ -1,0 +1,13 @@
+{
+    "title": "Vanilla Sock",
+    "description": "A basic sock pattern. Worked top-down with a german short row heel",
+    "guage": {
+        "rows": 40,
+        "stitches": 33,
+        "rowHeight": 10,
+        "stsWidth": 10
+    },
+    "cuffLength": 50,
+    "legLength": 20,
+    "sizeRange": "womens"
+}

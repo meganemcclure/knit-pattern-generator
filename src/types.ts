@@ -26,10 +26,11 @@ export interface FootMeasurements {
 }
 
 export interface SockParamsType {
+    title: string,
+    description: string,
     guage: GuageType,
     cuffLength: number,
     legLength: number,
-    footLength: number,
     sizeRange: 'mens' | 'womens' | 'kids'
 }
 
@@ -61,6 +62,13 @@ export interface GSRType extends PatternSection {
 
 export interface FootType extends PatternSection {
     rounds: number[]
+
+    getLength: (guage: GuageType) => number[]
+}
+
+export interface ToeType extends PatternSection {
+    stsPerRound: number[],
+    decreases: number[]
 
     getLength: (guage: GuageType) => number[]
 }

@@ -1,5 +1,8 @@
 import type { PatternType, SockParamsType } from './types'
+import readline from 'readline'
 import Sock from './PatternTypes/sock'
+import * as pattern from './pattern1.json'
+import { sizeFormat } from './helpers'
 
 function printPattern(pattern: PatternType) {
     console.log(pattern.title)
@@ -9,21 +12,28 @@ function printPattern(pattern: PatternType) {
     pattern.sections.forEach(({heading, steps}) => {
         console.log('-----------------------------------------------------')
         console.log(heading)
-        // console.log(content)
         steps.forEach((step, index) => {
             console.log(`${index+1}. ${step}`)
         })
     })
 }
 
-function main() {
-    let guage = {
-        rows: 40,
-        stitches: 33,
-        rowHeight: 10,
-        stsWidth: 10
-    }
-    let params: SockParamsType = { guage, cuffLength: 10, legLength: 20, footLength: 35, sizeRange: 'womens' }
+function Question(qText: string, options: string[] | undefined = undefined): Promise<string> {
+    const rl = readline.createInterface({
+        input: process.stdin,
+        output: process.stdout,
+    });
+
+    return new Promise(resolve => rl.question(qText, ans => {
+        rl.close();
+        resolve(ans);
+    }))
+}
+
+async function main() {
+    let { title, description, guage, cuffLength, legLength } = pattern
+    let sizeRange: 'mens' | 'womens' | 'kids' = (pattern.sizeRange === 'mens' || pattern.sizeRange === 'womens' || pattern.sizeRange === 'kids') ? pattern.sizeRange : 'womens'
+    let params: SockParamsType = { title, description, guage, cuffLength, legLength, sizeRange }
     let testSock = new Sock(params)
     printPattern(testSock.generate())
 }

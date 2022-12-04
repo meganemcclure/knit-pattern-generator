@@ -1,7 +1,7 @@
-import type { GuageType, SectionType } from '../types'
+import type { GuageType, SectionType, ToeType } from '../types'
 import { getStitchHeight, repeat } from '../helpers'
 
-export class ClassicToe {
+export class ClassicToe implements ToeType {
     stsPerRound: number[]
     decreases: number[]
 
