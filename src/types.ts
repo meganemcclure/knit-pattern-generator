@@ -41,7 +41,6 @@ export interface PatternSection {
 
 export interface SockType {
     roundSts: number
-    caston: CastOnType
     cuff: CuffType
     leg: LegType
     heel: GSRType
@@ -51,12 +50,11 @@ export interface SockType {
     generate: () => PatternType
 }
 
-export interface CastOnType extends PatternSection {
-    stsPerRound: number
-}
-
 export interface CuffType extends PatternSection {
+    stsPerRound: number
     rounds: number
+    castOnMethod?: string
+    castOffMethod?: string
 }
 
 export interface LegType extends PatternSection {

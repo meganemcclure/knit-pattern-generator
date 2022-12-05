@@ -1,18 +1,23 @@
 import { CuffType, GuageType, SectionType } from "../types"
 import { getStitchHeight } from "../helpers"
 
-export class Cuff implements CuffType {
+export class CastOnCuff implements CuffType {
+    stsPerRound: number
     rounds: number
+    castOnMethod: string
 
-    constructor(length: number, guage: GuageType) {
+    constructor(stsPerRound: number, length: number, castOnMethod: string, guage: GuageType) {
+        this.stsPerRound = stsPerRound
         this.rounds = length / getStitchHeight(guage)
+        this.castOnMethod = castOnMethod
     }
 
     getSection(stitchType: string): SectionType {
         return {
             heading: 'Cuff',
             steps: [
-                `Join in the round.`,
+                `Cast on ${this.stsPerRound} sts using the ${this.castOnMethod}.`,
+                `Join to work in the round.`,
                 `Work ${this.rounds} round(s) of ${stitchType}.`
             ]
         }

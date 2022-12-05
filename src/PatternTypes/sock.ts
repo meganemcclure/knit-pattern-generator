@@ -1,7 +1,6 @@
-import type { SockType, CastOnType, CuffType, LegType, GSRType, FootType, ToeType, PatternType,  SockParamsType } from "../types";
+import type { SockType, CuffType, LegType, GSRType, FootType, ToeType, PatternType,  SockParamsType } from "../types";
 import * as resources from '../resources.json'
-import { CastOn } from '../PatternSections/caston'
-import { Cuff } from '../PatternSections/cuff'
+import { CastOnCuff } from '../PatternSections/cuff'
 import { Leg } from '../PatternSections/leg'
 import { GSRHeel } from '../PatternSections/heels'
 import { Foot } from '../PatternSections/foot'
@@ -27,7 +26,6 @@ const NEGATIVE_EASE_LENGTH = 0.9            // sock has 10% netagive ease length
 
 export class TopDownSock implements SockType {
     roundSts: number
-    caston: CastOnType
     cuff: CuffType
     leg: LegType
     heel: GSRType
@@ -42,8 +40,7 @@ export class TopDownSock implements SockType {
         if (count % 2 > 0) count += count % 2
 
         this.roundSts = count
-        this.caston = new CastOn(this.roundSts)
-        this.cuff = new Cuff(cuffLength, guage)
+        this.cuff = new CastOnCuff(this.roundSts, cuffLength, 'long tail cast on', guage)
         this.leg = new Leg(legLength, guage)
         this.heel = new GSRHeel(this.roundSts)
         this.toe = new ClassicToe(this.roundSts)
@@ -59,7 +56,6 @@ export class TopDownSock implements SockType {
             sections: []
         }
 
-        pattern.sections.push(this.caston.getSection('long tail cast on'))
         pattern.sections.push(this.cuff.getSection('1x1 rib'))
         pattern.sections.push(this.leg.getSection('stockinette stitch'))
         pattern.sections.push(this.heel.getSection('stockinette stitch'))
