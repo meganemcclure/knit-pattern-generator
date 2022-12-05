@@ -2,34 +2,33 @@ import type { GuageType, SectionType, ToeType } from '../types'
 import { getStitchHeight, repeat } from '../helpers'
 
 export class ClassicToe implements ToeType {
-    stsPerRound: number[]
-    decreases: number[]
+    stsPerRound: number
+    decreases: number
 
-    constructor(stsPerRound: number[]) {
+    constructor(stsPerRound: number) {
         this.stsPerRound = stsPerRound
-        this.decreases = stsPerRound.map(sts => {
-            let initial = Math.floor(sts*0.7) // only leave 30% of the stitches on for the toe bind off
-            if (initial % 2 > 0) return initial - (initial % 2)
-            return initial
-        })
+        let initial = Math.floor(stsPerRound*0.7) // only leave 30% of the stitches on for the toe bind off
+        
+        if (initial % 2 > 0) this.decreases = initial - (initial % 2)
+        else this.decreases = initial
     }
 
     getLength(guage: GuageType) {
-        return this.decreases.map(sts => ((sts/2)+1) * getStitchHeight(guage))
+        return ((this.decreases/2)+1) * getStitchHeight(guage)
     }
 
     getSection(): SectionType {
-        let x = this.stsPerRound.map(sts => sts/2)
+        let x = this.stsPerRound/2
         let repeatSection = repeat(
             `Knit 1 round. K1, K2tog, knit to 3 sts before marker, SSK, K1, SM, K1, K2tog, kit to 3 sts before marker, SSK, K1.`, 
-            this.decreases.map(dec => dec/2)
+            this.decreases/2
         )
         return {
             heading: 'Toe',
             steps: [
                 `Setup Round: Work ${x} sts. PM, Work ${x}`,
                 `${repeatSection}.`,
-                `You should now have ${this.stsPerRound.map((sts, index) => sts-this.decreases[index])} sts remaining on the needles.
+                `You should now have ${this.stsPerRound-this.decreases} sts remaining on the needles.
 Split the stitches evenly across 2 needles, and Kitchener Stitch across to close the gap.`
             ]
         }

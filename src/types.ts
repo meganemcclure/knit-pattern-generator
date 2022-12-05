@@ -31,15 +31,28 @@ export interface SockParamsType {
     guage: GuageType,
     cuffLength: number,
     legLength: number,
-    sizeRange: 'mens' | 'womens' | 'kids'
+    sizeRange: 'mens' | 'womens' | 'kids',
+    size: number
 }
 
 export interface PatternSection {
     getSection: (stitchType: string) => SectionType
 }
 
+export interface SockType {
+    roundSts: number
+    caston: CastOnType
+    cuff: CuffType
+    leg: LegType
+    heel: GSRType
+    foot: FootType
+    toe: ToeType
+
+    generate: () => PatternType
+}
+
 export interface CastOnType extends PatternSection {
-    stsPerRound: number[]
+    stsPerRound: number
 }
 
 export interface CuffType extends PatternSection {
@@ -51,24 +64,24 @@ export interface LegType extends PatternSection {
 }
 
 export interface GSRType extends PatternSection {
-    stsPerRound: number[]
-    thirds: number[]
-    remainders: number[]
-    outerSections: number[]
-    innerSections: number[]
+    stsPerRound: number
+    thirds: number
+    remainder: number
+    outer: number
+    inner: number
 
-    getLength: (guage: GuageType) => number[]
+    getLength: (guage: GuageType) => number
 }
 
 export interface FootType extends PatternSection {
-    rounds: number[]
+    rounds: number
 
-    getLength: (guage: GuageType) => number[]
+    getLength: (guage: GuageType) => number
 }
 
 export interface ToeType extends PatternSection {
-    stsPerRound: number[],
-    decreases: number[]
+    stsPerRound: number,
+    decreases: number
 
-    getLength: (guage: GuageType) => number[]
+    getLength: (guage: GuageType) => number
 }

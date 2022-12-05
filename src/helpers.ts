@@ -4,9 +4,9 @@ export function sizeFormat(stitches: number[] | string[]) {
     return stitches.join(', ')
 }
 
-export function repeat(section: string, repeats: number[]): string {
+export function repeat(section: string, repeats: number): string {
     return `*${section}*
-        Work from * to * ${sizeFormat(repeats)} time(s).`
+        Work from * to * ${repeats} time(s).`
 }
 
 export function getStitchHeight(guage: GuageType) {
