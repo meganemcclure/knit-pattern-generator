@@ -1,5 +1,5 @@
 import type { PatternType, SockParamsType } from './types'
-import { TopDownSock } from './PatternTypes/sock'
+import { TopDownSock, ToeUpSock } from './PatternTypes/sock'
 import * as pattern from './pattern1.json'
 
 function printPattern(pattern: PatternType) {
@@ -17,10 +17,9 @@ function printPattern(pattern: PatternType) {
 }
 
 async function main() {
-    let { title, description, guage, cuffLength, legLength, size } = pattern
     let sizeRange: 'mens' | 'womens' | 'kids' = (pattern.sizeRange === 'mens' || pattern.sizeRange === 'womens' || pattern.sizeRange === 'kids') ? pattern.sizeRange : 'womens'
-    let params: SockParamsType = { title, description, guage, cuffLength, legLength, sizeRange, size }
-    let testSock = new TopDownSock(params)
+    let params: SockParamsType = { ...pattern, sizeRange }
+    let testSock = new ToeUpSock(params)
     printPattern(testSock.generate())
 }
 

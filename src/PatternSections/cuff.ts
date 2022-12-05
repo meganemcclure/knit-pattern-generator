@@ -23,3 +23,25 @@ export class CastOnCuff implements CuffType {
         }
     }
 }
+
+export class CastOffCuff implements CuffType {
+    stsPerRound: number
+    rounds: number
+    castOffMethod: string
+
+    constructor(stsPerRound: number, length: number, castOffMethod: string, guage: GuageType) {
+        this.stsPerRound = stsPerRound
+        this.rounds = length / getStitchHeight(guage)
+        this.castOffMethod = castOffMethod
+    }
+
+    getSection(stitchType: string): SectionType {
+        return {
+            heading: 'Cuff',
+            steps: [
+                `Work ${this.rounds} round(s) of ${stitchType}`,
+                `Cast off using the ${this.castOffMethod}.`
+            ]
+        }
+    }
+}

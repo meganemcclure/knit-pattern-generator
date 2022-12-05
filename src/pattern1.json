@@ -7,8 +7,12 @@
         "rowHeight": 10,
         "stsWidth": 10
     },
+    "mainStitch": "stockinette stitch",
+    "cuffStitch": "1x1 rib",
     "cuffLength": 10,
     "legLength": 20,
     "sizeRange": "womens",
-    "size": 6
+    "size": 6,
+    "start": "toe",
+    "heelType": "gsr"
 }

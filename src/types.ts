@@ -29,10 +29,14 @@ export interface SockParamsType {
     title: string,
     description: string,
     guage: GuageType,
+    mainStitch: string,
+    cuffStitch: string,
     cuffLength: number,
     legLength: number,
     sizeRange: 'mens' | 'womens' | 'kids',
-    size: number
+    size: number,
+    start: string,
+    heelType: string
 }
 
 export interface PatternSection {
@@ -79,7 +83,7 @@ export interface FootType extends PatternSection {
 
 export interface ToeType extends PatternSection {
     stsPerRound: number,
-    decreases: number
+    diff: number
 
     getLength: (guage: GuageType) => number
 }

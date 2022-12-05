@@ -17,7 +17,7 @@ export class Foot implements FootType {
     getSection(stitchType: string): SectionType {
         return {
             heading: 'Foot',
-            steps: [`Join in the round. Then work ${this.rounds} round(s) of ${stitchType}.`]
+            steps: [`Work ${this.rounds} round(s) of ${stitchType}`]
         }
     }
 }

@@ -1,36 +1,50 @@
 import type { GuageType, SectionType, ToeType } from '../types'
-import { getStitchHeight, repeat } from '../helpers'
+import { getStitchHeight } from '../helpers'
 
 export class ClassicToe implements ToeType {
     stsPerRound: number
-    decreases: number
+    diff: number
 
     constructor(stsPerRound: number) {
         this.stsPerRound = stsPerRound
         let initial = Math.floor(stsPerRound*0.7) // only leave 30% of the stitches on for the toe bind off
         
-        if (initial % 2 > 0) this.decreases = initial - (initial % 2)
-        else this.decreases = initial
+        if (initial % 2 > 0) this.diff = initial - (initial % 2)
+        else this.diff = initial
     }
 
     getLength(guage: GuageType) {
-        return ((this.decreases/2)+1) * getStitchHeight(guage)
+        return ((this.diff/2)+1) * getStitchHeight(guage)
     }
 
     getSection(): SectionType {
-        let x = this.stsPerRound/2
-        let repeatSection = repeat(
-            `Knit 1 round. K1, K2tog, knit to 3 sts before marker, SSK, K1, SM, K1, K2tog, kit to 3 sts before marker, SSK, K1.`, 
-            this.decreases/2
-        )
+        let steps = []
+        for (let i = 0; i < this.diff/4; i++) {
+            let middleSts = (this.stsPerRound-(i*2)-6)
+            let step = `K1, K2tog, work ${middleSts} sts, SSK, K1, K2tog, ${middleSts}, SSK, K1`
+            steps.push(step)
+        }
+        steps.push(`You should now have ${this.stsPerRound-this.diff} sts remaining on the needles. Distribute the sts evenly across 2 needles, and use Kitchener Stitch to close the gap.`)
         return {
             heading: 'Toe',
-            steps: [
-                `Setup Round: Work ${x} sts. PM, Work ${x}`,
-                `${repeatSection}.`,
-                `You should now have ${this.stsPerRound-this.decreases} sts remaining on the needles.
-Split the stitches evenly across 2 needles, and Kitchener Stitch across to close the gap.`
-            ]
+            steps: steps
+        }
+    }
+}
+
+export class ToeUpToe extends ClassicToe implements ToeType {
+    getSection(): SectionType {
+        let steps = [`Cast on ${this.stsPerRound-this.diff} sts using Judy's Magic Cast On. ${(this.stsPerRound-this.diff)/2} sts on each needle.`]
+
+        for (let i = 0; i < this.diff/4; i++) {
+            let middleSts = (((this.stsPerRound-this.diff)/2)+(i*2)-4)
+            let step = `K1, KFB, work ${middleSts} sts, KFB, K2, KFB, work ${middleSts} sts, KFB, K1`
+            steps.push(step)
+            steps.push(`Work 1 round`)
+        }
+        return {
+            heading: 'Toe',
+            steps: steps
         }
     }
 }
